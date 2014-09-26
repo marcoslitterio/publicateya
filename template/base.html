@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE|default:"en-us" }}" xml:lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">		
+		<!-- Google Chrome Frame -->
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<link rel="shortcut icon" href="{{STATIC_URL}}img/favicon.ico" />
+		<title>{% if title %}{{title}}{% else %}Sistemas de Gestión para la Educación{% endif %}</title>
+		{% include "adminextras/console-fix.html" %}
+	    <!-- Framework CSS -->
+		<link rel="stylesheet" href="{{STATIC_URL}}css/blueprint/screen.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="{{STATIC_URL}}css/blueprint/print.css" type="text/css" media="print">
+		<!--[if lt IE 8]><link rel="stylesheet" href="{{STATIC_URL}}css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+		<link rel="stylesheet" href="{{STATIC_URL}}css/estilo-base-mde.css" type="text/css" media="screen"></link>
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/general.css" media="screen">
+		<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}js/jquery-ui/css/cupertino/jquery-ui.custom.css" media="screen">
+		{% block extraheaders %}
+			{% load selectable_tags %}
+	    	{% include_ui_theme %}
+	    	{% include_jquery_libs %}
+		{% endblock %}
+
+	</head>
+	<body>
+		<div class="container">
+			<div class="span-24 last header">
+				<div class="span-18">
+					<h2>{% block title %}{% if title %}{{ title }}{% else %}Ministerio de Educación{%endif%}{% endblock %}</h2>
+					<span>{% block subtitulo %}{% endblock %}</span>
+				</div>
+				<div class="span-6 last login">
+					<div class="box">
+						{% block login %}
+							{% if user.is_authenticated %}
+								<b>Ususario sin autenticación</b>
+							{% else %}
+								Bienvenido {{ user }}
+							{% endif %}
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+			<div class="span-24 last content">
+				{% block content %}
+							
+				{% endblock %}		
+			</div>	
+		</div>
+		
+		{% block endscripts %}
+		{% endblock %}
+	</body>
+</html>
+	
